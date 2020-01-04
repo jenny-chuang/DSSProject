@@ -1,0 +1,269 @@
+﻿@model TaoyuanActivity.Models.Activity
+<!DOCTYPE html>
+<html>
+@*#a09c7f*@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>桃園文子少</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img src="~/Content/Material/logo.png" />
+            </div>
+            <ul class="list-unstyled components">
+
+                <li style="color:white;">
+                    <a href="~/Activity/Index" style="text-decoration:none;color:#a09c7f;font-weight:bold;padding-left:15px">Home</a>
+                </li>
+                <li style="color:white;">
+                    <a href="~/Activity/Site" style="text-decoration:none;color:#a09c7f;font-weight:bold;padding-left:15px">活動場地查詢</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <h1 class="header-title text-center">活動考量因素重要程度</h1>
+                </div>
+            </nav>
+            <div class="jumbotron" style="padding:20px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            與居民交流程度
+                        </div>
+                        <div class="col-sm-1" style="padding:0px">
+                            不重要
+                        </div>
+                        <div class="col-sm-2" style="padding:0px">
+                            <label><input type="radio" name="Communication" value="1" checked> 1</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Communication" value="2"> 2</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Communication" value="3"> 3</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Communication" value="4"> 4</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Communication" value="5"> 5</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-1">
+                            重要
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            宣傳地方特色
+                        </div>
+                        <div class="col-sm-1" style="padding:0px">
+                            不重要
+                        </div>
+                        <div class="col-sm-2" style="padding:0px">
+                            <label><input type="radio" name="LocalFea" value="1" checked > 1</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalFea" value="2"> 2</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalFea" value="3"> 3</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalFea" value="4"> 4</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalFea" value="5"> 5</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-1">
+                            重要
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            促進地方經濟
+                        </div>
+                        <div class="col-sm-1" style="padding:0px">
+                            不重要
+                        </div>
+                        <div class="col-sm-2" style="padding:0px">
+                            <label><input type="radio" name="LocalEco" value="1" checked> 1</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalEco" value="2"> 2</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalEco" value="3"> 3</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalEco" value="4"> 4</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="LocalEco" value="5"> 5</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-1">
+                            重要
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            促進各國文化交流
+                        </div>
+                        <div class="col-sm-1" style="padding:0px">
+                            不重要
+                        </div>
+                        <div class="col-sm-2" style="padding:0px">
+                            <label><input type="radio" name="CulCom" value="1" checked> 1</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="CulCom" value="2"> 2</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="CulCom" value="3"> 3</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="CulCom" value="4"> 4</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="CulCom" value="5"> 5</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-1">
+                            重要
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            安全性
+                        </div>
+                        <div class="col-sm-1" style="padding:0px">
+                            不重要
+                        </div>
+                        <div class="col-sm-2" style="padding:0px">
+                            <label><input type="radio" name="Security" value="1" checked> 1</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Security" value="2"> 2</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Security" value="3"> 3</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Security" value="4"> 4</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Security" value="5"> 5</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-1">
+                            重要
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            不受天氣影響程度
+                        </div>
+                        <div class="col-sm-1" style="padding:0px">
+                            不重要
+                        </div>
+                        <div class="col-sm-2" style="padding:0px">
+                            <label><input type="radio" name="Weather" value="1" checked> 1</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Weather" value="2"> 2</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Weather" value="3"> 3</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Weather" value="4"> 4</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Weather" value="5"> 5</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-1">
+                            重要
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            成本
+                        </div>
+                        <div class="col-sm-1" style="padding:0px">
+                            不重要
+                        </div>
+                        <div class="col-sm-2" style="padding:0px">
+                            <label><input type="radio" name="Cost" value="1" checked> 1</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Cost" value="2"> 2</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Cost" value="3"> 3</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Cost" value="4"> 4</label>&nbsp;&nbsp;
+                            <label><input type="radio" name="Cost" value="5"> 5</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-1">
+                            重要
+                        </div>
+                    </div>
+                    <div>
+                        <button id="submit_btn" class="k-button k-primary btn-search" style="background-color:#a09c7f ; border-color:#a09c7f">送出</button>
+
+                        <div class="responsive-message"></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <h1 id="cmdlbl" class="header-title"></h1>
+                    </div>
+                    </nav>
+                    @*<label id="cmdlbl" style="font-size:large;font-weight:bold;color:#a09c7f;"></label>*@
+                    <div id="Result"></div>
+</div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+<script src="~/scripts/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var url = window.location.toString();
+        //var ary = url.split('Model/');
+        //ary[1].
+        //    var id = "";
+        var ary = url.split('Model/')[1];
+        console.log(ary);
+           
+        $("#submit_btn").click(function (e) {
+
+            var communication = $('input[name=Communication]:checked').val();
+            var localFea = $('input[name=LocalFea]:checked').val();
+            var localEco = $('input[name=LocalEco]:checked').val();
+            var culCom = $('input[name=CulCom]:checked').val();
+            var security = $('input[name=Security]:checked').val();
+            var weather = $('input[name=Weather]:checked').val();
+            var cost = $('input[name=Cost]:checked').val();
+
+            var radioData = communication + "," + localFea + "," + localEco + "," + culCom + "," + security + "," + weather + "," + cost
+            console.log(radioData)
+
+            $.ajax({
+                type: "post",
+                dataType: "Json",
+                data: {
+                    "actId": ary,
+                    "weight": radioData
+                },
+                url: "/Activity/GetActDataById",
+                success: function (response) {
+                    $("#cmdlbl").text("推薦活動結果")
+                    $("#Result").kendoGrid({
+                        dataSource: { 
+                            data:response,
+                            pageSize: 6
+                        },
+                        height: 450,
+                        sortable: true,
+                        pageable: {
+                            input: true,
+                            numeric: false
+                        },
+                        columns: [
+                            { field: "Id", title: "推薦排序", width: "15%" },
+                            { field: "ActName", title: "活動名稱", width: "40%" },
+                            { field: "ActType", title: "活動類別", width: "45%" }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    alert("系統發生錯誤");
+                }
+            });
+        })
+        
+
+    });
+    </script>

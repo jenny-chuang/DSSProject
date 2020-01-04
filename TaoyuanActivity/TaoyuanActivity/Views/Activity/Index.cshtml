@@ -1,0 +1,610 @@
+﻿@model TaoyuanActivity.Models.Activity
+
+<!DOCTYPE html>
+<style>
+    .uk-link, a {
+        color: white;
+    }
+</style>
+<html>
+@*#a09c7f*@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>桃園文子少</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img src="~/Content/Material/logo.png" />
+            </div>
+
+            <ul class="list-unstyled components">
+
+                <li style="color:white;">
+                    <a href="~/Activity/Index" style="text-decoration:none;color:#a09c7f;font-weight:bold;padding-left:15px">Home</a>
+                </li>
+                <li style="color:white;">
+                    <a href="~/Activity/Site" style="text-decoration:none;color:#a09c7f;font-weight:bold;padding-left:15px">活動場地查詢</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <h1 class="header-title text-center">活動規劃決策支援系統</h1>
+                </div>
+            </nav>
+            @*<div class="jumbotron" style="padding:20px;background-color:#F8F9FA">*@
+                <div class="uk-container">
+                    <!-- <div class="uk-container align-center"> -->
+
+                    <label style="font-size:large;font-weight:bold; color:#a09c7f;">目標族群</label>
+                    <br>
+                    <select id="target_group" style="width:30%"></select>
+                    <br>
+                    <br>
+                    @*<button id="search_btn" class="k-button k-primary btn-search">查詢</button>*@
+
+                    <label id="cmdActLbl" style="font-size:large;font-weight:bold; color:#a09c7f;"></label>
+                    <!-- <input id="recommend_act" class='k-textbox' type='text' style="width:50%" /> -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label id="act_type_1"></label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label id="act_type_2"></label>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <label id="act_type_3"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div id="TOP1_grid"></div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div id="TOP2_grid"></div>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <div id="TOP3_grid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<table>
+                            <tr>
+                                <td>
+                                    <label id="act_type_1"></label>
+                                </td>
+                                <td>
+                                    <label id="act_type_2"></label>
+                                </td>
+                                <td>
+                                    <label id="act_type_3"></label>
+                                </td>
+                                @foreach (var item in (List<TaoyuanActivity.Models.Activity>)ViewBag.SearchResult)
+                                    {
+                                        <td>@item.ActType</td>
+                                    }
+                            </tr>
+                            <tr>
+                                <td >
+                                    <div id="TOP1_grid" style="display:inline-grid"></div>
+                                </td>
+                                <td >
+                                    <div id="TOP2_grid" style="display:inline-grid"></div>
+                                </td>
+                                <td >
+                                    <div id="TOP3_grid" style="display:inline-grid"></div>
+                                </td>
+                            </tr>
+                        </table>*@
+                    <br>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                        <button href="#table" data-toggle="collapse" type="button" class="btn btn-box-tool">
+                            <i class="fa fa-angle-double-down"></i>
+                        </button>&nbsp;&nbsp;
+                        其他活動
+                    </nav>
+
+                    <div id="table" class="collapse list-unstyled">
+
+                        <select id="other_act_drop" style="width:30%"></select>
+                        <br>
+                        <br>
+
+                        @*<select class="other_act_dropdownlist" style="width:30%"></select>*@
+                        <div id="other_act_grid"></div>
+
+                        @*<td>
+                                <div id="act_search"></div>
+                            </td>*@
+
+                    </div>
+                    <hr>
+                    <div>
+                        <label style="font-size:large;font-weight:bold;color:#a09c7f;">已選活動</label>
+                        <div id="selected_act_grid"></div>
+                    </div>
+                    <div>
+                        <br>
+                        <button id="submit_btn" class="k-button k-primary btn-search" style="background-color:#a09c7f ; border-color:#a09c7f">送出</button>
+
+                        <div class="responsive-message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @*</div>*@
+</body>
+
+</html>
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+<script src="~/scripts/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#target_group").kendoDropDownList({
+            optionLabel: "請選擇...",
+            dataTextField: "Text",
+            dataValueField: "Value",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "GetAgeData",
+                        type: "post",
+                        dataType: "Json"
+                    }
+                }
+            }
+        });
+
+        $("#other_act_drop").kendoDropDownList({
+            optionLabel: "請選擇...",
+            dataTextField: "Text",
+            dataValueField: "Value",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "GetAllActTypeData",
+                        type: "post",
+                        dataType: "Json"
+                    }
+                }
+            },
+            index: 0
+        });
+
+        $("#other_act_grid").kendoGrid({
+            dataSource: null,
+            height: 450,
+            sortable: true,
+            pageable: {
+                input: true,
+                numeric: false
+            },
+            columns: [
+                { selectable: true, width: "10%" },
+                { field: "Value", title: "Seq", width: "15%" },
+                { field: "Text", title: "活動名稱", width: "41%" }
+                //{field:"Book_Bought_Date",title: "購書日期", width:"10%"},
+                //{command: {text: "編輯" ,click: updateClick },title: "", width:"8%"},
+            ]
+        });
+
+        $("#selected_act_grid").kendoGrid({
+            dataSource: {
+                data: null
+            },
+            height: 450,
+            sortable: true,
+            //pageable: {
+            //    input: true,
+            //    numeric: false
+            //},
+            columns: [
+                { hidden: true, field: "Id" },
+                { field: "Text", title: "活動名稱", width: "40%" },
+                { field: "ActType", title: "活動類別", width: "50%" },
+                { command: { text: "刪除", click: deleteClick }, title: "", width: "10%" },
+            ]
+        });
+
+        $("#other_act_drop").change("input", function (e) {
+            $.ajax({
+                url: "GetTypeActivity",
+                type: "post",
+                dataType: "Json",
+                data: {
+                    "Act_Type_Id": $("#other_act_drop").data("kendoDropDownList").value()
+                },
+                success: function (Response) {
+                    $("#other_act_grid").kendoGrid({
+                        dataSource: {
+                            data: Response,
+                            schema: {
+                                model: {
+                                    id: "Id"
+                                }
+                            },
+                            pageSize: 5,
+                        },
+                        height: 450,
+                        sortable: true,
+                        change: onChange,
+                        pageable: {
+                            input: true,
+                            numeric: false
+                        },
+                        columns: [
+                            { selectable: true, width: "10%" },
+                            { field: "Value", title: "Seq", width: "15%" },
+                            { field: "Text", title: "活動名稱", width: "41%" },
+                            { hidden: true, field: "ActType" }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    alert("系統發生錯誤");
+                }
+            });
+        })
+
+        $("#target_group").change("input", function (e) {
+            $.ajax({
+                url: "GetCmdActTypeData",
+                type: "post",
+                dataType: "Json",
+                data: {
+                    "Age_Id": $("#target_group").data("kendoDropDownList").value(),
+                },
+                success: function (searchResponse) {
+                    $("#cmdActLbl").text("推薦活動"),
+                    $("#act_type_1").text(String(searchResponse[0].Text)),
+                    $("#act_type_2").text(String(searchResponse[1].Text)),
+                    $("#act_type_3").text(String(searchResponse[2].Text)),
+                    $.ajax({
+                        url: "GetTypeActivity",
+                        type: "post",
+                        dataType: "Json",
+                        data: {
+                            "Act_Type_Id": searchResponse[0].Value,
+                        },
+                        success: function (Response) {
+                            $("#TOP1_grid").kendoGrid({
+                                dataSource: {
+                                    data: Response,
+                                    schema: {
+                                        model: {
+                                            id: "Id"
+                                        }
+                                    },
+                                    pageSize: 4,
+                                },
+                                height: 450,
+                                sortable: true,
+                                change: onChange,
+                                pageable: {
+                                    input: true,
+                                    numeric: false
+                                },
+                                columns: [
+                                    { selectable: true, width: "10%" },
+                                    { field: "Value", title: "Seq", width: "15%" },
+                                    { field: "Text", title: "活動名稱", width: "41%" },
+                                    { hidden: true, field: "ActType" }
+                                ]
+                            });
+                        },
+                        error: function (error) {
+                            alert("系統發生錯誤");
+                        }
+                    });
+                    $.ajax({
+                        url: "GetTypeActivity",
+                        type: "post",
+                        dataType: "Json",
+                        data: {
+                            "Act_Type_Id": searchResponse[1].Value,
+                        },
+                        success: function (Response) {
+                            $("#TOP2_grid").kendoGrid({
+                                dataSource: {
+                                    data: Response,
+                                    schema: {
+                                        model: {
+                                            id: "Id"
+                                        }
+                                    },
+                                    pageSize: 4,
+                                },
+                                height: 450,
+                                sortable: true,
+                                change: onChange,
+                                pageable: {
+                                    input: true,
+                                    numeric: false
+                                },
+                                columns: [
+                                    { selectable: true, width: "10%" },
+                                    { field: "Value", title: "Seq", width: "15%" },
+                                    { field: "Text", title: "活動名稱", width: "41%" },
+                                    { hidden: true, field: "ActType" }
+                                ]
+                            });
+                        },
+                        error: function (error) {
+                            alert("系統發生錯誤");
+                        }
+                    });
+                    $.ajax({
+                        url: "GetTypeActivity",
+                        type: "post",
+                        dataType: "Json",
+                        data: {
+                            "Act_Type_Id": searchResponse[2].Value,
+                        },
+                        success: function (Response) {
+                            $("#TOP3_grid").kendoGrid({
+                                dataSource: {
+                                    data: Response,
+                                    schema: {
+                                        model: {
+                                            id: "Id"
+                                        }
+                                    },
+                                    pageSize: 4,
+                                },
+                                height: 450,
+                                sortable: true,
+                                change: onChange,
+                                pageable: {
+                                    input: true,
+                                    numeric: false
+                                },
+                                columns: [
+                                    { selectable: true, width: "10%" },
+                                    { field: "Value", title: "Seq", width: "15%" },
+                                    { field: "Text", title: "活動名稱", width: "41%" },
+                                    { hidden: true, field: "ActType" }
+                                ]
+                            });
+                        },
+                        error: function (error) {
+                            alert("系統發生錯誤");
+                        }
+                    });
+                    $("#other_act_drop").val(0);
+                    $("#other_act_drop").kendoDropDownList({
+                        optionLabel: "請選擇...",
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "GetOthActTypeData",
+
+                                    data: {
+                                        "Age_Id": $("#target_group").data("kendoDropDownList").value(),
+                                    },
+                                    type: "post",
+                                    dataType: "Json"
+                                }
+                            }
+                        },
+
+                    });
+                    $("#other_act_grid").kendoGrid({
+                        dataSource: null,
+                        height: 450,
+                        sortable: true,
+                        pageable: {
+                            input: true,
+                            numeric: false
+                        },
+                        columns: [
+                            { selectable: true, width: "10%" },
+                            { field: "Seq", title: "Seq", width: "15%" },
+                            { field: "ActName", title: "活動名稱", width: "41%" },
+                            { hidden: true, field: "ActType" }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    alert("系統發生錯誤");
+                }
+            });
+
+        });
+
+        function onChange(e) {
+            var aagrid = $("#selected_act_grid").data("kendoGrid");
+            var rows = $("#TOP1_grid").data("kendoGrid");// 會回傳所選到的 row 集合
+            var selectedItem = [];
+            var selectedItem2 = [];
+            var selectedItem3 = [];
+            var selectedItem4 = [];
+
+            if (rows != undefined) {
+                var data = rows._data;
+                selectedItem = rows._selectedIds;
+                for (item in selectedItem) {
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].Id == item) {
+                            var update = { "Id": data[i].Id, "Text": data[i].Text, "ActType": data[i].ActType }
+                            aagrid.dataSource.add(update);
+                        }
+                    }
+                }
+            }
+            var rows2 = $("#TOP2_grid").data("kendoGrid");// 會回傳所選到的 row 集合
+            if (rows2 != undefined) {
+                var data2 = rows2._data;
+                selectedItem2 = rows2._selectedIds;
+                for (item2 in selectedItem2) {
+                    for (var i = 0; i < data2.length; i++) {
+                        if (data2[i].Id == item2) {
+                            var update2 = { "Id": data2[i].Id, "Text": data2[i].Text, "ActType": data2[i].ActType }
+                            aagrid.dataSource.add(update2);
+                        }
+                    }
+                }
+            }
+            var rows3 = $("#TOP3_grid").data("kendoGrid");// 會回傳所選到的 row 集合
+            if (rows3 != undefined) {
+                var data3 = rows3._data;
+                selectedItem3 = rows3._selectedIds;
+                for (item in selectedItem3) {
+                    for (var i = 0; i < data3.length; i++) {
+                        if (data3[i].Id == item) {
+                            var update3 = { "Id": data3[i].Id, "Text": data3[i].Text, "ActType": data3[i].ActType }
+                            aagrid.dataSource.add(update3);
+                        }
+                    }
+                }
+            }
+            var rows4 = $("#other_act_grid").data("kendoGrid");// 會回傳所選到的 row 集合
+            if (rows4 != undefined) {
+                var data4 = rows4._data;
+                selectedItem4 = rows4._selectedIds;
+                for (item2 in selectedItem4) {
+                    for (var i = 0; i < data4.length; i++) {
+                        if (data4[i].Id == item2) {
+                            var update4 = { "Id": data4[i].Id, "Text": data4[i].Text, "ActType": data4[i].ActType }
+                            aagrid.dataSource.add(update4);
+                        }
+                    }
+                }
+            }
+            var Alldata = aagrid._data;
+            var unique = [];
+            for (var i = 0; i < Alldata.length; i++) {
+                if (i == 0) {
+                    unique.push(Alldata[i]);
+                }
+                else {
+                    for (var j = 0; j < unique.length; j++) {
+                        if (unique[j].Id == Alldata[i].Id) {
+                            break;
+                        }
+                    }
+                    if (j == unique.length) {
+                        unique.push(Alldata[i]);
+                    }
+                }
+            }
+            //Alldata.filter(onlyUnique);
+            
+
+            aagrid.dataSource.data([]);
+            aagrid.dataSource.data(unique);
+        }
+
+        //        //if (count == 0) {
+        //        //    aaa.push(dataItem.toJSON());
+        //        //    count++;
+        //        //}
+        //        //else {
+        //        //    aaa.push(dataItem.toJSON());
+
+        //        //}
+        //        aagrid.dataSource.add(update);
+        //    });
+        //}
+
+        //        //if (count == 0) {
+        //        //    aaa.push(dataItem.toJSON());
+        //        //    count++;
+        //        //}
+        //        //else {
+        //        //    aaa.push(dataItem.toJSON());
+
+        //        //}
+        //        aagrid.dataSource.add(update);
+        //    });
+        //}
+
+    })
+
+    $("#submit_btn").click(function (e) {
+        var rows = $("#selected_act_grid").data("kendoGrid");// 會回傳所選到的 row 集合
+        var data = rows._data;
+        var ActId;
+        for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+                ActId = data[i].Id;
+            }
+            else {
+                ActId += "," + data[i].Id;
+            }
+        }
+
+        //var BookId = this.dataItem($(e.target).closest('tr')).Book_Id;
+        window.location.href = "/Activity/Model/" + ActId;
+    });
+
+    function deleteClick(e) {
+        e.preventDefault();
+        var tr = this.dataItem($(e.target).closest('tr'));
+        //var r = confirm("確定刪除?");
+        if (confirm("確定刪除?")) {
+
+            grid = $("#selected_act_grid").data("kendoGrid");
+            grid.dataSource.data().remove(tr);
+
+        };
+
+    };
+
+
+    //$("#btn_Search_Add").click(function(){
+    //    window.location.href = "/Book/InsertBook";
+    //});
+
+    //$("#btn_Search_Clear").click(function(){
+    //    //window.location.href = "/Book/Index";
+    //    $("#Book_Name").val("");
+    //    $("#Book_Category").data("kendoDropDownList").select(0);
+    //    $("#Borrower").data("kendoDropDownList").select(0);
+    //    $("#Borrow_State").data("kendoDropDownList").select(0);
+    //    $("#search_grid").data("kedoGrid").dataSource.data([]);
+    //});
+
+    //function updateClick(e) {
+    //    e.preventDefault();
+    //    var BookId = this.dataItem($(e.target).closest('tr')).Book_Id;
+    //    window.location.href = "/Book/UpdateBook/" + BookId;
+    //};
+
+
+</script>

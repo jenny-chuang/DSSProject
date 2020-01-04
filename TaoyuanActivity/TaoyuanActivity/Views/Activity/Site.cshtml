@@ -1,0 +1,181 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>活動場地查詢</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img src="~/Content/Material/logo.png" style="padding-left:0px" />
+            </div>
+
+            <ul class="list-unstyled components">
+
+                <li style="color:white;">
+                    <a href="~/Activity/Index" style="text-decoration:none;color:#a09c7f;font-weight:bold;padding-left:15px">Home</a>
+                </li>
+                <li style="color:white;">
+                    <a href="~/Activity/Site" style="text-decoration:none;color:#a09c7f;font-weight:bold;padding-left:15px">活動場地查詢</a>
+                </li>
+            </ul>
+
+        </nav>
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                <h1 class="header-title text-center">活動場地查詢</h1>
+
+            </nav>
+            <div class="jumbotron" style="padding:20px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            室內外
+                        </div>
+                        <div class="col-sm-1">
+                            <input id="in_out" type="radio" name="in_out" value="室內" checked> 室內
+
+                        </div>
+                        <div class="col-sm-1">
+                            <input id="in_out" type="radio" name="in_out" value="室外"> 室外
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            坪數
+                        </div>
+                        <div class="col-sm-1">
+                            <select id="ping"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <br>
+                            <button id="search_btn" class="k-button k-primary btn-search" style="background-color:#a09c7f ; border-color:#a09c7f">查詢</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="site_search"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+<script src="~/scripts/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //$("#target_group").kendoDropDownList({
+        //    //optionLabel: "請選擇...",
+        //    dataTextField: "Text",
+        //    dataValueField: "Value",
+        //    dataSource: {
+        //        transport: {
+        //            read: {
+        //                url: "GetAgeData",
+        //                type: "post",
+        //                dataType: "Json"
+        //            }
+        //        }
+        //    }
+        //});
+
+        var ping = [
+            { Text: "0~50", Value: "50" },
+            { Text: "50~100", Value: "100" },
+            { Text: "100~500", Value: "500" },
+            { Text: "501以上", Value: "501" },
+        ];
+
+        $("#ping").kendoDropDownList({
+            //optionLabel: "請選擇...",
+            dataTextField: "Text",
+            dataValueField: "Value",
+            dataSource: ping,
+            index: 0
+        });
+
+        $("#search_btn").click(function () {
+            console.log($("#ping").data("kendoDropDownList").value());
+            console.log($('input[name=in_out]:checked').val());
+            $.ajax({
+                url: "GetSiteData",
+                type: "post",
+                dataType: "Json",
+                data: {
+                    "Ping_Id": $("#ping").data("kendoDropDownList").value(),
+                    "In_Out_Id": $('input[name=in_out]:checked').val()
+                },
+                success: function (searchResponse) {
+                    console.log(searchResponse);
+                    $("#site_search").kendoGrid({
+                        dataSource: {
+                            data: searchResponse,
+                            //schema: {
+                            //    model: {
+                            //        id: "Id"
+                            //    }
+                            //},
+                            pageSize: 10,
+                        },
+                        height: 450,
+                        sortable: true,
+                        pageable: {
+                            input: true,
+                            numeric: false
+                        },
+                        columns: [
+                            { field: "SitePubPri", title: "公私立", width:"10%"},
+                            { field: "SiteName", title: "場地名稱", width: "25%" },
+                            { field: "SiteAddressName", title: "地址", width: "25%" },
+                            { field: "SitePhone", title: "電話", width: "15%" },
+                            { field: "SiteDType", title: "場地類型", width: "15%" },
+                            { field: "SitePing", title: "坪數", width: "10%" }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    alert("系統發生錯誤");
+                }
+            });
+        })
+
+    
+
+    });
+</script>
